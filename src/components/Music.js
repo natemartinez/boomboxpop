@@ -1,10 +1,13 @@
 import '../style.css';
+import Main from './Main';
+import Nav from './Nav';
 
 function Music() {
   return (
-    <div>
-      
-    </div>
+    <>
+     <h2>This is the music component</h2>
+     <Nav/>
+    </>
   );
 }
 

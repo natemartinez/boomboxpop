@@ -1,6 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import Main from './components/Main';
-import Music from './components/MusicPlayer';
+import Music from './components/Music';
 
 function App() {
   return (

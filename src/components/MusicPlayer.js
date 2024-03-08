@@ -9,12 +9,11 @@ function MusicPlayer() {
 
   const findPopRadios = async () => {
     try {
+      // For now, just use one station for foundational testing
       let jpop = await api.searchStations({
-        country: 'Japan',
-        tag: ['music', 'pop'],
-        limit: 100,
+        name: 'Big B Radio - Jpop',
       });
-      console.log(jpop);
+      setRadioData(jpop[0].url);
     }
     catch (e) {
         console.error(e)
@@ -23,14 +22,18 @@ function MusicPlayer() {
 
   useEffect(() => {
     findPopRadios();
-  }, [])
+  })
 
   return (
-    <div>
-      <button type="submit"></button>
-      <audio controls src={radioData} type='audio/mpeg'></audio>
-      <p>Powered by <a href='https://www.radio-browser.info' target='_blank'>RadioBrowser</a></p>
-    </div>
+    <>
+      <div>
+         <button type="submit"></button>
+         <audio controls src={radioData} type='audio/mpeg'></audio>
+         <p>Powered by <a href='https://www.radio-browser.info' target='_blank'>RadioBrowser</a></p>
+      </div>
+    </>
+    
+    
   );
 }
 

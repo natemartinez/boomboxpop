@@ -1,0 +1,59 @@
+body{
+    background-color: midnightblue;
+    color: white;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+
+/* <Nav/> */
+.nav-wrapper{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    
+}
+.nav-menu{
+    display: flex;
+    position: relative;
+    height: 5em;
+    justify-content: center;
+    align-items: center;
+}
+.nav-menu > div {
+    margin: 0em 1em;
+}
+
+/* <Articles/> */
+.article-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.article{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    height: 25em;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+.article-img{
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+.article-name{
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+.article-tag{
+    background-color: darkgray;
+    position: absolute;
+    height: 4em;
+    width: 100%;
+    bottom: 0px;
+}
