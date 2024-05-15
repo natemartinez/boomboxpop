@@ -1,59 +1,180 @@
 body{
-    background-color: midnightblue;
-    color: white;
+    background-color: #181860!important;
+    color: white!important;
 }
 a{
-    color: white;
-    text-decoration: none;
+    color: white!important;
+    text-decoration: none!important;
 }
 
-/* <Nav/> */
-.nav-wrapper{
+/* Title */
+.title-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 1.5em;
+}
+#title{
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-size: 1.4em;
+}
+.section-title{
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+/* Nav Section */
+.nav-container{
+    margin-top: 1em;
+    margin-bottom: 3em;
+    text-align: center;
+}
+.nav-arrow{
+    width: 1.5em;
+    height: 1.5em;
+}
+#nav1{
+    transform: rotate(90deg);
+}
+#nav2{
+    transform: rotate(270deg);
+}
+#logo{
+    width: 2.5em;
+}
+.nav-btn{
+    margin: 0.5em;
+}
+.carousel-indicators{
+    display: none!important;
+}
+
+/* <Bottom Menu/> */
+.menu-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: fixed;
     width: 100%;
     bottom: 0;
-    
 }
-.nav-menu{
+.menu{
     display: flex;
     position: relative;
-    height: 5em;
+    height: 4em;
     justify-content: center;
     align-items: center;
 }
-.nav-menu > div {
+.menu > div {
     margin: 0em 1em;
+}
+#menu-toggle{
+    width: 75px;
+    background: midnightblue;
+    border: none;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+#arrow-btn{
+    width: 30px;
+    height: 15px;
+}
+.menu-section{
+    background-color: #181860;
+}
+
+/* <MusicPlayer/> */
+.radio-player{
+    display: block;
+    width: 100%;
+    height: 75px;
+    background-color: #181860;
+}
+.radio-info{
+    display: flex;
+    align-items: center;
+}
+#radio-ico{
+    width: 75px;
+    margin-right: 10px;
+}
+#radio-name{
+    font-size: 1.2em;
+}
+#music-btn{
+    background: none;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 45px;
+    top: 35px;
+}
+#boomboxIcon{
+    width: 50px;
+    height: 50px;
 }
 
 /* <Articles/> */
-.article-section{
+.trend-section{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.article{
+
+.card-div{
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 20em;
-    height: 25em;
-    background-color: aliceblue;
+    background-color: rgb(58, 68, 84);
     border-radius: 10px;
+    margin: 0.5em;
+    max-height: 300px;
+    max-width: 450px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-.article-img{
+.card-img-div{
     position: relative;
-    height: auto;
+    height: 8em;
     width: 100%;
 }
-.article-name{
-    position: relative;
-    height: auto;
+.card-img{
+    height: 100%;
     width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
-.article-tag{
-    background-color: darkgray;
-    position: absolute;
-    height: 4em;
+.card-name{
+    position: relative;
+}
+.card-name h2{
+    font-size: 1.5em;
+}
+.card-tag{
+    background-color: rgb(58, 68, 84);
+    height: 3em;
     width: 100%;
     bottom: 0px;
+}
+.card-tag button{
+    border-radius: 5px;
+    background-color: rgb(120, 40, 200);
+    color: white;
+    border: 1px solid rgb(120, 40, 200);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+.styles-module_carousel-arrow__26sRw{
+    display: none;
+}
+.feat-section .carousel-item{
+    display: unset!important;
+}
+.featured{
+    padding: 0em 5em;
+}
+.featured .card-div{
+    width: 250px;
+    
 }

@@ -1,19 +1,43 @@
 import { useState, useEffect } from 'react';
 import '../style.css';
 import { Link } from 'react-router-dom';
+import Carousel from "react-bootstrap/Carousel";
+import Button from "react-bootstrap/Button";
+const images = require.context('../../public/images', true);
+
 
 function Nav() {
   return (
-    <>
-     <nav className='nav-wrapper'>
-       <div className='nav-menu'>
-        <div><Link to='/music'>Music</Link></div>
-        <div>Consoles</div>
-        <div>TV</div>
-        <div>Community</div>
-       </div> 
-     </nav>
-    </>
+    <div className='nav-container'>
+      <div className='title-div '>
+        <div className='d-flex align-items-center'>
+         <img id='logo' src={images('./logo.png')} alt=""/>
+         <h2 id='title'>boomboxPOP</h2>          
+        </div>
+        <Link><Button>Sign Up</Button></Link>
+      </div>
+
+      <nav>
+         <Carousel interval={null}>
+          <Carousel.Item>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+          </Carousel.Item>
+          <Carousel.Item>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+          </Carousel.Item>
+          <Carousel.Item>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+           <Button type="button" className="btn btn-dark nav-btn">Example</Button>
+          </Carousel.Item>
+        </Carousel>
+      </nav>
+
+    </div>
   );
 }
 
