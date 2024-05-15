@@ -178,3 +178,12 @@ a{
     width: 250px;
     
 }
+
+/*Topic Section*/
+.topic-wrapper{
+    flex-direction: column;
+}
+.topic-btn-div{
+    flex-direction: column;
+    padding: 5em;
+}

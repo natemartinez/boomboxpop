@@ -38,10 +38,10 @@ function Main() {
         <h1 className='section-title text-center'>Featured</h1>
         <SwipableCarousel/>
       </section>
-      <section className='topic-section'>
+      <section className='deals-section my-5'>
         <div>
-          <h2>All Topics</h2>
-          <h4>Specifically article content</h4>
+          <h2>All Deals</h2>
+          <h4>Specifically tech, game, subscription deal content</h4>
         </div>
       </section>
       <section className='sound-section my-5'>
@@ -54,6 +54,27 @@ function Main() {
           
         </div>
       </section>
+      <section className='all-topic-section my-5'>
+        <h2 className='text-center'>All Topics</h2>
+        <div className='d-flex topic-wrapper'>
+          <div className='d-flex topic-btn-div'>
+            <h2>Games</h2>
+            <button type="button">Example</button>
+            <button type="button">Example</button>
+            <button type="button">Example</button>
+          </div>
+          <div className='d-flex topic-btn-div'>
+            <h2>Music</h2>
+            <button type="button">Example</button>
+            <button type="button">Example</button>
+            <button type="button">Example</button>
+          </div>
+        </div>
+      </section>
+      <footer className='footer-section my-5'>
+        <h2>Where Social Media links will go</h2>
+         <p>Continue the conversation at one of our links!</p>
+      </footer>
     </>
   );
 }
