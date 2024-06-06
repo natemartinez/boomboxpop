@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# HTTPS Proxy certificates
+localhost.pem
+localhost-key.pem
