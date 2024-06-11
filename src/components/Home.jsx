@@ -9,7 +9,6 @@ import Nav from './Nav.jsx';
 function Home() {
   return (
     <>
-      <Nav/>
       <Main/> 
       <Menu/>
     </>

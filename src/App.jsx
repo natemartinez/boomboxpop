@@ -1,13 +1,17 @@
-import {Routes, Route} from 'react-router-dom';
-import Home from './components/Home.jsx';
+import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import Main from './components/Main';
+import Nav from './components/Nav';
 
-function App() {
-   
+const App = () => {
+
   return (
-    <div>
-      <h2>Hello</h2>
+    <div className="App">
+        <Nav/>
+        <Main/>
     </div>
   );
-}
+};
 
 export default App;

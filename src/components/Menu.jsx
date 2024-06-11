@@ -18,7 +18,6 @@ function Menu() {
   return (
     <div className='menu-container'>
      <button id='menu-toggle' type="button">
-      <img id='arrow-btn' onClick={menuToggle} src={images('./menu-arrow.png')} alt=""/>
      </button>
      
      {isShowing ?

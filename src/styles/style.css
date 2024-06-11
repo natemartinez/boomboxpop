@@ -1,6 +1,8 @@
 body{
     background-color: #181860!important;
     color: white!important;
+    font-family: 'Quicksand', 'sans-serif';
+    font-weight: 600;
 }
 a{
     color: white!important;
@@ -171,9 +173,14 @@ footer{
     display: none;
 }
 .feat-section .carousel-item{
-    display: unset!important;
+    width: 200px;
+    display: block;
 }
 
+
+.featured{
+    padding: 0em 1em;
+}
 .featured .card-div{
     width: 225px;
     margin: 0.5em;
@@ -181,12 +188,17 @@ footer{
 
 @media screen and (max-width:475px) {
   .featured .card-div{
-      width: 200px;
+      width: 220px;
       margin: 0em 1em;
   }
   .react-multiple-carousel__arrow{
     position: unset!important;
   }
+
+  .react-multi-carousel-item{
+    margin: 0em 3em;
+  }
+
 }
 @media screen and (min-width:426px) {
 

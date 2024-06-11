@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import Article1 from './articles/Article1';
 import '../styles/style.css';
 import { Link } from 'react-router-dom';
 import Carousel  from 'react-bootstrap/Carousel';
@@ -8,9 +9,36 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SwipableCarousel from './SwipableCarousel';
 import { AccordionItem, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 function Main() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [image, setImage] = useState(null);
+  const config = {
+    'Authorization': 'Bearer e54d7854ae95e38a4a54512213258d60bc3aa837ecb9b65e8d1c7801291921f18c9202ac4d36b95864ea8f5bbf20b7b9caa9adb9af6ed55951ee5bca58d66f31a5462057b595ec4b7dca2faa3a7e390127a855d0e82d524b348337d416cfaa550cca1d5e46439028614086c517460e19b5e91b083c85010096ca559384fd0bad',
+    'Access-Control-Allow-Origin': '*'
+}
 
+  useEffect(() => {
+    axios.get('http://localhost:1337/api/images', config)
+      .then(response => {
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error('There was an error fetching the images!', error);
+      });
+  }, []);
+ 
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  
   return (
     <>
       <section className='feat-section my-5'>
@@ -25,10 +53,10 @@ function Main() {
           <Col>
            <div className='card-div'>
              <div className='card-img-div'>
-              <img className='card-img' src={images("./example.jpg")} alt=""/>
+              <img className='card-img' src={image} alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-              <h2>This is an example title</h2>
+              <Link to={Article1}><h2>This is an example title</h2></Link>     
              </div>
              <div className='card-tag p-2'>
               <button type="button">PlayStation</button>
@@ -38,7 +66,7 @@ function Main() {
           <Col>
            <div className='card-div'>
              <div className='card-img-div'>
-              <img className='card-img' src={images("./example.jpg")} alt=""/>
+              <img className='card-img' alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
               <h2>This is an example title</h2>
@@ -51,7 +79,7 @@ function Main() {
           <Col>
            <div className='card-div'>
              <div className='card-img-div'>
-              <img className='card-img' src={images("./example.jpg")} alt=""/>
+              <img className='card-img' alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
               <h2>This is an example title</h2>
@@ -74,7 +102,7 @@ function Main() {
               <div className='product-div my-5'>
                <div className='product-card'>
                  <div className='p-4'>
-                   <img className='product-img' src={images("./xbox-remote.png")} alt=""/>
+                   <img className='product-img' alt=""/>
                  </div>
                  <div>
                    <div className='card-desc text-light'>
@@ -92,7 +120,7 @@ function Main() {
               <div className='product-div my-5'>
                <div className='product-card'>
                  <div className='p-4'>
-                   <img className='product-img' src={images("./xbox-remote.png")} alt=""/>
+                   <img className='product-img' alt=""/>
                  </div>
                  <div>
                    <div className='card-desc text-light'>
@@ -110,7 +138,7 @@ function Main() {
               <div className='product-div my-5'>
                <div className='product-card'>
                  <div className='p-4'>
-                   <img className='product-img' src={images("./xbox-remote.png")} alt=""/>
+                   <img className='product-img'  alt=""/>
                  </div>
                  <div>
                    <div className='card-desc text-light'>
@@ -128,7 +156,7 @@ function Main() {
               <div className='product-div my-5'>
                <div className='product-card'>
                  <div className='p-4'>
-                   <img className='product-img' src={images("./xbox-remote.png")} alt=""/>
+                   <img className='product-img' alt=""/>
                  </div>
                  <div>
                    <div className='card-desc text-light'>
@@ -170,7 +198,7 @@ function Main() {
            <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
               <Accordion.Header>
-                <img className='accordion-icon' src={images("./mushroom.png")} alt=""/>Mario Bros.
+                <img className='accordion-icon' alt=""/>Mario Bros.
               </Accordion.Header>
               <Accordion.Body>
                 Link to soundtrack radio
