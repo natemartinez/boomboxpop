@@ -4,28 +4,43 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { CarouselItem } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Article1 from './articles/Article1';
 
 
-const SwipableCarousel = () => {
+const FeatCarousel = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [coverImage, setCoverImage] = useState(null);
+    const [features, setFeatures] = useState([]);
+
     const config = {
-      'Authorization': 'Bearer e54d7854ae95e38a4a54512213258d60bc3aa837ecb9b65e8d1c7801291921f18c9202ac4d36b95864ea8f5bbf20b7b9caa9adb9af6ed55951ee5bca58d66f31a5462057b595ec4b7dca2faa3a7e390127a855d0e82d524b348337d416cfaa550cca1d5e46439028614086c517460e19b5e91b083c85010096ca559384fd0bad',
-      'Access-Control-Allow-Origin': '*'
+      'Authorization': 'Bearer e7338c25c4e7d195b6471ff9f8e0242db5474b2abe87380e586599621f327b9544d2da44efab6ef92c7cd66c393290528b16c1fc7698b83b88cc0138822271497b287ac5b44625fee34849eb46afcd3afe38154514aa91b657d19c8956efd9a2dadda566499356094446912706c3f989fb9be103316667974544ddbdc0a4a19a',
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+    const server = 'http://localhost:1337';
+
+    const getFeatures = () => {
+      axios.get(`${server}/features`, config)
+       .then(response => {
+         console.log(response.data.data);
+         setFeatures(response.data.data);
+         setLoading(false)
+       })
+       .catch(error => {
+         console.error('There was an error fetching the images!', error);
+       });
+   };
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
     }
   
-    useEffect(() => {
-      axios.get('http://localhost:1337/api/images', config)
-        .then(response => {
-          setCoverImage(response.data.data[0].attributes.url);
-          setLoading(false)
-        })
-        .catch(error => {
-          console.error('There was an error fetching the images!', error);
-        });
-    }, []);
-
     return (
       <Carousel
       additionalTransfrom={0}
@@ -86,7 +101,7 @@ const SwipableCarousel = () => {
                <img className='card-img' src={coverImage} alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-               <h2>This is an example title</h2>
+               <h2><Link to={'/articles/article1'}>Receive title from API</Link></h2>
              </div>
              <div className='card-tag p-2'>
                <button type="button">PlayStation</button>
@@ -129,4 +144,4 @@ const SwipableCarousel = () => {
     );
 };
 
-export default SwipableCarousel;
+export default FeatCarousel;

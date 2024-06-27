@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import MusicPlayer from './MusicPlayer';
 
 function Menu() {
-  const [isShowing, setIsShowing] = useState(false);
+  const [isShowing, setIsShowing] = useState(true);
 
   const menuToggle = () => {
     if (isShowing) {

@@ -89,6 +89,7 @@ footer{
     height: 15px;
 }
 .menu-section{
+    width: 100%;
     background-color: #181860;
 }
 
@@ -177,6 +178,9 @@ footer{
     display: block;
 }
 
+.Nintendo{
+    background-color: rgb(215, 18, 18)!important;
+}
 
 .featured{
     padding: 0em 1em;

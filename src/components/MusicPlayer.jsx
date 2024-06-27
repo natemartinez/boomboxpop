@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { RadioBrowserApi } from 'radio-browser-api';
 
 
+
 function MusicPlayer() {
   const api = new RadioBrowserApi('boomboxPOP/1.2');
   const [radioData, setRadioData] = useState(null);
@@ -11,6 +12,8 @@ function MusicPlayer() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
+
+  const server = 'http://localhost:1337/api';
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -51,7 +54,7 @@ function MusicPlayer() {
             <img id='radio-ico' src={radioIcon} alt=""/>
             <p id='radio-name'>{radioName}</p>
             <button id='music-btn' onClick={togglePlayPause}>
-             {isPlaying ? <img id='boomboxIcon' src={images('./bb-play.png')}/> : <img id='boomboxIcon' src={images('./bb-pause.png')}/>}
+             {isPlaying ? <img id='boomboxIcon' src={`${server}/images/bb-play.png`}/> : <img id='boomboxIcon' src={`${server}/images/bb-pause.png`}/>}
             </button>
            </div>
       </div>
