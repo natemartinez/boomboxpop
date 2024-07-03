@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import Article1 from './articles/Trend1';
 import '../styles/style.css';
 import { Link, useLocation } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
@@ -13,28 +12,19 @@ import { AccordionItem, Button, CarouselItem } from 'react-bootstrap';
 import axios from 'axios';
 import Nav from './Nav';
 import Menu from './Menu';
+import Soundtrack from './Soundtrack';
+import {config, server} from '../config';
 
 
 function Main() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [image, setImage] = useState(null);
-  const [cards, setCards] = useState([]);
   const [categories, setCategories] = useState([]);
   const [features, setFeatures] = useState([]);
   const [trends, setTrends] = useState([]);
   const location = useLocation();
-  const config = {
-    'Authorization': 'Bearer e7338c25c4e7d195b6471ff9f8e0242db5474b2abe87380e586599621f327b9544d2da44efab6ef92c7cd66c393290528b16c1fc7698b83b88cc0138822271497b287ac5b44625fee34849eb46afcd3afe38154514aa91b657d19c8956efd9a2dadda566499356094446912706c3f989fb9be103316667974544ddbdc0a4a19a',
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json; charset=utf-8'
-  }
-  const server = 'http://localhost:1337/api';
 
-  // Set the cards array
-  // Iterate through the title card array --> cards[i]
-
-  
   const getCategories = () => {
     axios.get(`${server}/categories`, config)
      .then(response => {
@@ -44,7 +34,7 @@ function Main() {
      .catch(error => {
        console.error('There was an error fetching the images!', error);
      });
- };
+  };
   
   const getTrends = () => {
      axios.get(`${server}/trendings`, config)
@@ -100,7 +90,7 @@ function Main() {
               <Link to={'/articles/trend1'}><h2>{trends[0].attributes.title}</h2></Link>     
              </div>
              <div className='card-tag p-2'>
-              <button type="button" className={trends[0].attributes.category}>{trends[0].attributes.category}</button>
+              <button type="button" id={trends[0].attributes.category}>{trends[0].attributes.category}</button>
              </div>
            </div>             
           </Col>
@@ -110,10 +100,10 @@ function Main() {
               <img className='card-img' alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-              <h2></h2>
+              <h2>{trends[1].attributes.title}</h2>
              </div>
              <div className='card-tag p-2'>
-              <button type="button">PlayStation</button>
+              <button id={trends[1].attributes.category} type="button">{trends[1].attributes.category}</button>
              </div>
            </div>              
           </Col>
@@ -123,17 +113,29 @@ function Main() {
               <img className='card-img' alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-              <h2>This is an example title</h2>
+              <h2>{trends[2].attributes.title}</h2>
              </div>
              <div className='card-tag p-2'>
-              <button type="button">PlayStation</button>
+              <button id={trends[2].attributes.category} type="button">{trends[2].attributes.category}</button>
+             </div>
+           </div>
+          </Col>
+          <Col>
+           <div className='card-div'>
+             <div className='card-img-div'>
+              <img className='card-img' alt=""/>
+             </div>
+             <div className='card-name p-4 text-light'>
+              <h2>{trends[3].attributes.title}</h2>
+             </div>
+             <div className='card-tag p-2'>
+              <button id={trends[3].attributes.category} type="button">{trends[3].attributes.category}</button>
              </div>
            </div>
           </Col>
         </Row>   
        </Container>        
       </section>
-
       <section className='feat-section my-5'>
         <h1 className='section-title text-center'>Featured</h1>
         <Carousel
@@ -195,28 +197,43 @@ function Main() {
                <img className='card-img' src={features[0].attributes.coverLink} alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-               <h2><Link to={'/articles/article1'}>{features[0].attributes.title}</Link></h2>
+               <h2><Link to={'/articles/Feat1'}>{features[0].attributes.title}</Link></h2>
              </div>
              <div className='card-tag p-2'>
-               <button type="button">{features[0].attributes.category}</button>
+               <button id={features[0].attributes.category} type="button">{features[0].attributes.category}</button>
              </div>
             </div>
           </div>
           </CarouselItem> 
           <CarouselItem>
-          <div className='featured'>
+           <div className='featured'>
             <div className='card-div'>
              <div className='card-img-div'>
                <img className='card-img'  alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-               <h2>This is an example title</h2>
+               <h2><Link to={'/articles/Feat2'}>{features[1].attributes.title}</Link></h2>
              </div>
              <div className='card-tag p-2'>
-               <button type="button">PlayStation</button>
+               <button id={features[1].attributes.category} type="button">{features[1].attributes.category}</button>
              </div>
             </div>
-          </div>
+           </div>
+          </CarouselItem> 
+          <CarouselItem>
+           <div className='featured'>
+            <div className='card-div'>
+             <div className='card-img-div'>
+               <img className='card-img' alt=""/>
+             </div>
+             <div className='card-name p-4 text-light'>
+               <h2><Link to={'/articles/Feat3'}>{features[2].attributes.title}</Link></h2>
+             </div>
+             <div className='card-tag p-2'>
+               <button id={features[2].attributes.category} type="button">{features[2].attributes.category}</button>
+             </div>
+            </div>
+           </div>
           </CarouselItem> 
           <CarouselItem>
           <div className='featured'>
@@ -225,17 +242,16 @@ function Main() {
                <img className='card-img' alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-               <h2>This is an example title</h2>
+               <h2><Link to={'/articles/Feat3'}>{features[3].attributes.title}</Link></h2>
              </div>
              <div className='card-tag p-2'>
-               <button type="button">PlayStation</button>
+               <button id={features[3].attributes.category} type="button">{features[3].attributes.category}</button>
              </div>
             </div>
           </div>
           </CarouselItem> 
         </Carousel>
       </section>    
-
       <section className='product-section my-5'>
         <Container>
           <h2 className='text-center'>All Deals</h2>
@@ -316,67 +332,7 @@ function Main() {
         </Container>
       </section>
       <section className='st-section my-3 p-5'>
-        <div className='d-flex flex-column'>
-           <h1 className='text-center m-2'>Soundtrack of the day</h1>
-
-           <div className='d-flex flex-row justify-content-evenly my-2 flex-wrap'>
-            <div className='track-info p-4 my-5'>
-           <h2 className='text-center p-2'>Game/Movie Title</h2>
-           <div className='track-img'>
-             <h2 className='text-dark'>Soundtrack Image</h2>
-           </div>
-            </div>
-            <div className='song-list my-5'>
-              <h2>Song List</h2>
-              <ul>
-                
-              </ul>
-            </div>            
-           </div>
-
-          </div>
-          <h1 className='mt-5 mb-4'>Other Soundtracks</h1>
-          <div className='track-list'>
-           <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-                <img className='accordion-icon' alt=""/>Mario Bros.
-              </Accordion.Header>
-              <Accordion.Body>
-                Link to soundtrack radio
-                <button type="button">Go!</button>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>Halo</Accordion.Header>
-              <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat.
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>Persona</Accordion.Header>
-              <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat.
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="3">
-              
-              <Accordion.Header>Kingdom Hearts</Accordion.Header>
-              <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat.
-              </Accordion.Body>
-            </Accordion.Item>
-           </Accordion>
-          </div>
+        <Soundtrack/>
       </section>
       <section className='all-topic-section my-5'>
         <h1 className='text-center'>All Topics</h1>

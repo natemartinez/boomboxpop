@@ -28,8 +28,9 @@ footer{
     font-size: 1.4em;
 }
 .section-title{
+    font-size: 2.3em;
     margin-top: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 /* Nav Section */
@@ -49,7 +50,7 @@ footer{
     transform: rotate(270deg);
 }
 #logo{
-    width: 2.5em;
+    width: 3em;
 }
 .nav-btn{
     margin: 0.5em;
@@ -66,6 +67,7 @@ footer{
     position: fixed;
     width: 100%;
     bottom: 0;
+    z-index: 1;
 }
 .menu{
     display: flex;
@@ -135,13 +137,12 @@ footer{
     position: relative;
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
-    margin: 0.5em;
+    margin: 1.5em;
     background-color: darkgray;
 }
 .card-img-div{
     position: relative;
-    height: 8em;
+    height: 10em;
     width: 100%;
 }
 .card-img{
@@ -164,9 +165,9 @@ footer{
 }
 .card-tag button{
     border-radius: 5px;
-    background-color: rgb(120, 40, 200);
+    background-color: rgb(58, 68, 84);
     color: white;
-    border: 1px solid rgb(120, 40, 200);
+    border: 1px solid rgb(58, 68, 84);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
@@ -178,16 +179,30 @@ footer{
     display: block;
 }
 
-.Nintendo{
+#Nintendo{
     background-color: rgb(215, 18, 18)!important;
 }
-
-.featured{
-    padding: 0em 1em;
+#PlayStation{
+    background-color: #6114bf;
+    border: #6114bf;
 }
-.featured .card-div{
-    width: 225px;
-    margin: 0.5em;
+#Sega{
+    background-color: rgb(0, 76, 255);
+}
+#Studios{
+    background-color: rgb(205, 141, 24);
+}
+#Xbox{
+    background-color: green;
+}
+#Fortnite{
+    background-color: blueviolet;
+}
+#TV{
+    background-color: gray;
+}
+#Music{
+    background-color: cornflowerblue;
 }
 
 @media screen and (max-width:475px) {
@@ -207,6 +222,28 @@ footer{
 @media screen and (min-width:426px) {
 
 }
+
+/* Articles */
+
+.featured{
+    padding: 0em 1em;
+}
+.featured .card-div{
+    width: 225px;
+    margin: 0.5em;
+}
+#content-img{
+    width: 20em;
+}
+.table-of-contents{
+    position: relative;
+    width: 15em;
+    height: 10em;
+    border-radius: 5px;
+    background-color: rgb(126, 117, 105);
+    color: white;
+}
+
 
 /*Soundtrack Section*/
 .track-info{

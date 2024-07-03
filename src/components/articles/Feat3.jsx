@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import DOMPurify from 'dompurify';
 import axios from 'axios';
 import {config, server} from '../../config';
 
 
-function Feat1() {
+function Feat3() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [title, setTitle] = useState('');
@@ -33,7 +32,7 @@ function Feat1() {
         let processedText = content
             .replace(/Playstation 2/gi, '<strong>XBOX</strong>')
             .replace(/highlight/gi, '<b>highlight</b>');
-        return DOMPurify(processedText)
+        return processedText
     };
      
     useEffect(() => {
@@ -66,4 +65,4 @@ function Feat1() {
   );
 }
 
-export default Feat1;
+export default Feat3;
