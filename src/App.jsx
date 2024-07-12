@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Main from './components/Main';
 import Articles from './components/Articles';
-import Trend1 from './components/articles/Trend1';
-import Trend2 from './components/articles/Trend2';
-import Trend3 from './components/articles/Trend3';
-import Feat1 from './components/articles/Feat1';
-import Feat2 from './components/articles/Feat2';
-import Feat3 from './components/articles/Feat3';
+import PStation1 from './components/articles/PS/PStation1';
+import PStation2 from './components/articles/PS/PStation2';
+import PStation3 from './components/articles/PS/PStation3';
+import Nin1 from './components/articles/Nintendo/Nin1';
+import Nin2 from './components/articles/Nintendo/Nin2';
+import Nin3 from './components/articles/Nintendo/Nin3';
 
 function App() {
-
   return (
     <Routes>
-        <Route index element={<Main/>} />
-        <Route path='/articles'>
-          <Route index element={<Articles />} /> {/* This line will be article homepage */}
-          <Route path='trend1' element={<Trend1 />} />
-          <Route path='trend2' element={<Trend2 />} />
-          <Route path='trend3' element={<Trend3 />} />
-          <Route path='feat1' element={<Feat1 />} />
-          <Route path='feat2' element={<Feat2 />} />
-          <Route path='feat3' element={<Feat3 />} />
+      <Route index element={<Main />} />
+      <Route path="articles" element={<Articles />}>
+        <Route path="PlayStation">
+          <Route path="pstation1" element={<PStation1 />} />
+          <Route path="pstation2" element={<PStation2 />} />
+          <Route path="pstation3" element={<PStation3 />} />
         </Route>
-      
+        <Route path="Nintendo">
+          <Route path="Nin1" element={<Nin1 />} />
+          <Route path="nin2" element={<Nin2 />} />
+          <Route path="nin3" element={<Nin3 />} />
+        </Route>
+      </Route>
     </Routes>
   );
 }

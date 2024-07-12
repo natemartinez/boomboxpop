@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {config, server} from '../../config';
+import {config, server} from '../../../config';
 
-function Trend2() {
+function Nin3() {
 
   
   return (
@@ -13,4 +13,4 @@ function Trend2() {
   );
 }
 
-export default Trend2;
+export default Nin3;

@@ -23,12 +23,12 @@ function Main() {
   const [categories, setCategories] = useState([]);
   const [features, setFeatures] = useState([]);
   const [trends, setTrends] = useState([]);
+  const [path, setPath] = useState('/articles/');
   const location = useLocation();
 
   const getCategories = () => {
     axios.get(`${server}/categories`, config)
      .then(response => {
-       console.log('Categories: ', response.data.data);
        setCategories(response.data.data);
      })
      .catch(error => {
@@ -39,7 +39,6 @@ function Main() {
   const getTrends = () => {
      axios.get(`${server}/trendings`, config)
       .then(response => {
-        console.log('Trending: ', response.data.data);
         setTrends(response.data.data);
       })
       .catch(error => {
@@ -50,7 +49,6 @@ function Main() {
   const getFeatures = () => {
     axios.get(`${server}/features`, config)
      .then(response => {
-       console.log('Featured ', response.data.data);
        setFeatures(response.data.data);
        setLoading(false);
      })
@@ -87,7 +85,7 @@ function Main() {
               <img className='card-img' src={trends[0].attributes.coverLink} alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-              <Link to={'/articles/trend1'}><h2>{trends[0].attributes.title}</h2></Link>     
+              <Link to={`${path}${trends[0].attributes.category}${trends[0].attributes.codename}`}><h2>{trends[0].attributes.title}</h2></Link>     
              </div>
              <div className='card-tag p-2'>
               <button type="button" id={trends[0].attributes.category}>{trends[0].attributes.category}</button>
@@ -100,7 +98,7 @@ function Main() {
               <img className='card-img' alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-              <h2>{trends[1].attributes.title}</h2>
+               <Link to={`${path}${trends[1].attributes.category}${trends[1].attributes.codename}`}><h2>{trends[1].attributes.title}</h2></Link>
              </div>
              <div className='card-tag p-2'>
               <button id={trends[1].attributes.category} type="button">{trends[1].attributes.category}</button>
@@ -113,7 +111,7 @@ function Main() {
               <img className='card-img' alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-              <h2>{trends[2].attributes.title}</h2>
+               <Link to={`${path}${trends[2].attributes.category}${trends[2].attributes.codename}`}><h2>{trends[2].attributes.title}</h2></Link>
              </div>
              <div className='card-tag p-2'>
               <button id={trends[2].attributes.category} type="button">{trends[2].attributes.category}</button>
@@ -197,7 +195,7 @@ function Main() {
                <img className='card-img' src={features[0].attributes.coverLink} alt=""/>
              </div>
              <div className='card-name p-4 text-light'>
-               <h2><Link to={'/articles/Feat1'}>{features[0].attributes.title}</Link></h2>
+             <Link to={`${path}${features[0].attributes.category}${features[0].attributes.codename}`}><h2>{features[0].attributes.title}</h2></Link>
              </div>
              <div className='card-tag p-2'>
                <button id={features[0].attributes.category} type="button">{features[0].attributes.category}</button>

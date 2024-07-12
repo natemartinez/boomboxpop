@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import {config, server} from '../../config';
+import {config, server} from '../../../config';
 
 
-function Feat2() {
+function PStation2() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [title, setTitle] = useState('');
@@ -65,4 +65,4 @@ function Feat2() {
   );
 }
 
-export default Feat2;
+export default PStation2;
