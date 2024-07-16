@@ -250,17 +250,24 @@ footer{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 20em;
-    height: 20em;
+    width: 25em;
+    height: 30em;
     background-color: rgb(70, 70, 70);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
 }
-.track-img{
-    height: 10em;
-    width: 15em;
-    background-color: white;
+.sotd-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
+.sotd-desc{
+    font-size: 1.2em;
+}
+.sotd-img{
+    width: 50%;
+}
+
 .accordion-icon{
     width: 3em;
 }
@@ -271,6 +278,13 @@ footer{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
 }
+
+@media screen and (min-width:767px) {
+    .track-info{
+        width: 25em;
+    }
+}
+
 
 /*Topic Section*/
 .topic-wrapper{

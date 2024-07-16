@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {config, server} from '../../../config';
+import DOMPurify from 'dompurify';
 
 function Nin1() {
   const [loading, setLoading] = useState(true);

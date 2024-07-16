@@ -329,7 +329,7 @@ function Main() {
           </Row>             
         </Container>
       </section>
-      <section className='st-section my-3 p-5'>
+      <section className='st-section p-5'>
         <Soundtrack/>
       </section>
       <section className='all-topic-section my-5'>
