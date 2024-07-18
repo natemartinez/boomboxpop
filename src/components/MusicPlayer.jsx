@@ -2,8 +2,6 @@ import '../styles/style.css';
 import { useState, useEffect, useRef } from 'react';
 import { RadioBrowserApi } from 'radio-browser-api';
 
-
-
 function MusicPlayer() {
   const api = new RadioBrowserApi('boomboxPOP/1.2');
   const [radioData, setRadioData] = useState(null);

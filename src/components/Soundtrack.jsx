@@ -5,6 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import { Link } from 'react-router-dom';
 import MusicPlayer from './MusicPlayer';
 import { config, server } from '../config';
+import { fetchData, getData } from '../library';
 import axios from 'axios';
 
 function Soundtrack() {
@@ -12,19 +13,35 @@ function Soundtrack() {
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDesc, setMainDesc] = useState(null);
   const [mainImg, setMainImg] = useState(null);
-  const [mainList, setMainList] = useState(null);
+  const [sotdList, setSOTDList] = useState([]);
+  const [playBtn, setPlayBtn] = useState(null);
 
-  const getInfo = () => {
+  const getInfo = async() => {
     axios.get(`${server}/soundtracks`, config)
       .then(response => {
         setSoundtracks(response.data.data);
-        setSOTD();
+        setSOTD(response.data.data);
       })
       .catch(error => {
         console.error('There was an error fetching the soundtrack!', error);
       });
   };
 
+  const getImages = async() => {
+   await fetchData();
+   setImages(getData());
+  };
+
+  const setImages = (images) => {
+    const imgServer = 'http://localhost:1337';
+    console.log('Img Data: ', images);
+    // Play button for music
+    let playBtn = images.find(obj => obj.name == 'bb-play.png');
+    let playBtnUrl = imgServer + playBtn.url;
+
+    setPlayBtn(playBtnUrl)
+  };
+ 
   // this function will change the index when the page refreshes
   // SOTD = Soundtrack of the day
   const setSOTD = () => {
@@ -35,20 +52,33 @@ function Soundtrack() {
       setMainTitle(soundtrackInfo.title);
       setMainDesc(soundtrackInfo.description);
       setMainImg(soundtrackInfo.coverLink);
-      setMainList(soundtrackInfo.songList);
+      setSOTDSongs(soundtrackInfo.songList);
       // setMainTrack(soundtracks[0]) // will eventually be newIndex when soundtracks are filled
     }
   };
 
-  useEffect(() => {
-    getInfo();
-    setSOTD()
-  }, [soundtracks]);
+  const setSOTDSongs = (songList) => {
+    let songArr = [];
+    Object.entries(songList).forEach(([key, value]) => {
+      songArr.push(value);
+    }); 
+    setSOTDList(songArr);
+  };
 
   // Function to process and sanitize HTML content
   const processContent = (content) => {
     return DOMPurify.sanitize(content);
   };
+
+  useEffect(() => {
+    getInfo();
+    getImages();
+  }, []);
+
+  useEffect(() => {
+    setSOTD(soundtracks);
+  }, [soundtracks]);
+
 
   return (
     <>
@@ -56,7 +86,7 @@ function Soundtrack() {
         <h1 className='text-center m-2'>Soundtrack of the day</h1>
 
         <div className='d-flex flex-row justify-content-evenly my-2 flex-wrap'>
-          <div className='track-info p-4 my-1'>
+          <div className='sotd-info p-4 my-1'>
             <h2 className='text-center p-2'>
               <div dangerouslySetInnerHTML={{ __html: processContent(mainTitle) }} />
             </h2>
@@ -67,10 +97,16 @@ function Soundtrack() {
               <div dangerouslySetInnerHTML={{ __html: processContent(mainDesc) }} />
             </p>
           </div>
-          <div className='song-list my-5'>
-            <h2>Song List</h2>
+          <div className='sotd-list my-3 fw-bold'>
+            <h2 className='text-center my-2'>Song List</h2>
             <ul>
-              {/* Add your song list here */}
+              {sotdList ? sotdList.map((song, index) => (
+                <div key={index} className='d-flex justify-center'>
+                  <li className='my-3 sotd-tracks' key={index} dangerouslySetInnerHTML={{ __html: processContent(song.title) }}></li>
+                  <button id='play-btn'><img id='play-btn-img' src={playBtn}/></button>
+                </div>
+               )) : ''
+              }
             </ul>
           </div>
         </div>

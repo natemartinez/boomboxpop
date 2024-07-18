@@ -14,16 +14,18 @@ import Nav from './Nav';
 import Menu from './Menu';
 import Soundtrack from './Soundtrack';
 import {config, server} from '../config';
+import { fetchData, getData } from '../library';
 
 
 function Main() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [image, setImage] = useState(null);
   const [categories, setCategories] = useState([]);
   const [features, setFeatures] = useState([]);
   const [trends, setTrends] = useState([]);
   const [path, setPath] = useState('/articles/');
+  const [remoteIcon, setremoteIcon] = useState(null);
+  const [gamesBkgrd, setgamesBkgrd] = useState(null);
   const location = useLocation();
 
   const getCategories = () => {
@@ -56,6 +58,30 @@ function Main() {
        console.error('There was an error fetching the images!', error);
      });
   };
+
+  const getImages = async() => {
+    await fetchData();
+    setImages(getData());
+   };  
+
+  const setImages = (images) => {
+    console.log(images);
+    const imgServer = 'http://localhost:1337';
+  
+    // Icon for games section
+    let remoteIcon = images.find(obj => obj.name == 'remote-ico.png');
+    let remoteIconUrl = imgServer + remoteIcon.url;
+
+    let gamesBkgrd = images.find(obj => obj.name == 'controllers.jpg');
+    let gamesBkgrdUrl = imgServer + gamesBkgrd.url;
+
+    setremoteIcon(remoteIconUrl);
+    setgamesBkgrd(gamesBkgrdUrl);
+  };
+
+  useEffect(() => {
+    getImages()
+  }, [])
 
   useEffect(() => {
     getCategories();
@@ -333,17 +359,35 @@ function Main() {
         <Soundtrack/>
       </section>
       <section className='all-topic-section my-5'>
-        <h1 className='text-center'>All Topics</h1>
-        <div className='d-flex topic-wrapper p-3'>
-          <div className='topic-btn-div container p-5'>
-            <h2 className='all-topic-header'>Games</h2>
-            <Button className=" p-3">Example Text</Button>
-          </div>
-          <div className='topic-btn-div col-md-10 container p-5'>
-            <h2 className='all-topic-header'>Music</h2>
-            <Button className=" p-3">Example Text</Button>
+        <div>
+         <h1 className='text-center my-5'>All Topics</h1>
+          <div className='bkgrd-wrapper'>
+              <img className='games-bkgrd img-fluid' src={gamesBkgrd} alt="remotes"/>
+          </div>        
+          <div className='games-menu'>
+            <div className='games-menu-content d-flex flex-column align-items-center'>
+             <img src={remoteIcon} className='game-ico img-fluid' width="75" height="75" alt="controller"/>
+             <h2 className='all-topic-header'>Games</h2>
+             <Button className="p-3 ">Example Text</Button>              
+            </div>
+
           </div>
         </div>
+        <div>
+         <h1 className='text-center my-5'>All Topics</h1>
+          <div className='bkgrd-wrapper'>
+              <img className='games-bkgrd img-fluid' src={gamesBkgrd} alt="remotes"/>
+          </div>        
+          <div className='games-menu'>
+            <div className='games-menu-content d-flex flex-column align-items-center'>
+             <img src={remoteIcon} className='game-ico img-fluid' width="75" height="75" alt="controller"/>
+             <h2 className='all-topic-header'>Games</h2>
+             <Button className="p-3 ">Example Text</Button>              
+            </div>
+
+          </div>
+        </div>
+     
       </section>
       <section className='embed-section'>
         <div className='embed-div'>
