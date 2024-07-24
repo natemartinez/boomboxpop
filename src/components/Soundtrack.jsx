@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 import '../styles/style.css';
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import MusicPlayer from './MusicPlayer';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import { config, server } from '../config';
 import { fetchData, getData } from '../library';
 import axios from 'axios';
@@ -84,22 +88,21 @@ function Soundtrack() {
     <>
       <div className='d-flex flex-column'>
         <h1 className='text-center m-2'>Soundtrack of the day</h1>
-
         <div className='d-flex flex-row justify-content-evenly my-2 flex-wrap'>
-          <div className='sotd-info p-4 my-1'>
-            <h2 className='text-center p-2'>
-              <div dangerouslySetInnerHTML={{ __html: processContent(mainTitle) }} />
-            </h2>
-            <div className='sotd-container m-2'>
-              <img className='sotd-img' src={`${mainImg}`} alt="soundtrack of the day image"/>
-            </div> 
-            <p className='text-center p-1 sotd-desc'>
-              <div dangerouslySetInnerHTML={{ __html: processContent(mainDesc) }} />
-            </p>
-          </div>
-          <div className='sotd-list my-3 fw-bold'>
-            <h2 className='text-center my-2'>Song List</h2>
-            <ul>
+            <div className='sotd-info p-4 my-1'> 
+              <h2 className='text-center p-2'>
+                <div dangerouslySetInnerHTML={{ __html: processContent(mainTitle) }} />
+              </h2>
+              <div className='sotd-container m-2'>
+                <img className='sotd-img' src={`${mainImg}`} alt="soundtrack of the day image"/>
+              </div> 
+              <p className='text-center p-1 sotd-desc'>
+                <div dangerouslySetInnerHTML={{ __html: processContent(mainDesc) }} />
+              </p>
+            </div>
+            <div className='sotd-list my-3 fw-bold'>
+             <h2 className='text-center my-2'>Song List</h2>
+             <ul className='track-list'>
               {sotdList ? sotdList.map((song, index) => (
                 <div key={index} className='d-flex justify-center'>
                   <li className='my-3 sotd-tracks' key={index} dangerouslySetInnerHTML={{ __html: processContent(song.title) }}></li>
@@ -107,12 +110,18 @@ function Soundtrack() {
                 </div>
                )) : ''
               }
-            </ul>
-          </div>
+             </ul>
+            </div>          
         </div>
       </div>
-      <h1 className='mt-5 mb-4'>Other Soundtracks</h1>
-      <Accordion>
+    
+      <Container> 
+         <Row>
+          <h1 className='mt-5 mb-4 text-center'>Other Soundtracks</h1>
+         </Row>
+         <Row>
+          <Col>
+         <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Accordion Item #1</Accordion.Header>
           <Accordion.Body>
@@ -137,7 +146,42 @@ function Soundtrack() {
             culpa qui officia deserunt mollit anim id est laborum.
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
+         </Accordion>
+          </Col>
+          <Col>
+         <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Accordion Item #1</Accordion.Header>
+          <Accordion.Body>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>Accordion Item #2</Accordion.Header>
+          <Accordion.Body>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Accordion.Body>
+        </Accordion.Item>
+         </Accordion>
+          </Col>
+         </Row>
+         <Row>
+           <Button id='allST-btn'>All Soundtracks</Button>
+         </Row>
+      </Container>
+     
     </>
   );
 }

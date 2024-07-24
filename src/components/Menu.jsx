@@ -17,22 +17,24 @@ function Menu() {
   // add animation to menu-toggle when clicked
   return (
     <div className='menu-container'>
-     <button id='menu-toggle' type="button">
-     </button>
-     
-     {isShowing ?
-       <>
-         <MusicPlayer/>
-         <nav className='menu-section'>
-          <div className='menu'>
-           <div><Link to='/music'>Music</Link></div>
-           <div>Consoles</div>
-           <div>TV</div>
-           <div>Community</div>
-          </div>  
-         </nav>
-       </> : ''
-     }  
+      <div className='menu-wrapper'>    
+       <button id='menu-toggle' type="button">
+       </button>
+       
+       {isShowing ?
+         <>
+           <MusicPlayer/>
+           <nav className='menu-section'>
+            <div className='menu'>
+             <div><Link to='/music'>Soundtracks</Link></div>
+             <div>Consoles</div>
+             <div>TV</div>
+             <div>Community</div>
+            </div>  
+           </nav>
+         </> : ''
+       }  
+      </div>
     </div>
   );
 }

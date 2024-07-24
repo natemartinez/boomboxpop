@@ -1,17 +1,19 @@
 import '../styles/style.css';
 import { useState, useEffect, useRef } from 'react';
 import { RadioBrowserApi } from 'radio-browser-api';
+import { fetchData, getData } from '../library';
+import {config, server} from '../config';
+
 
 function MusicPlayer() {
   const api = new RadioBrowserApi('boomboxPOP/1.2');
   const [radioData, setRadioData] = useState(null);
   const [radioName, setRadioName] = useState(null);
   const [radioIcon, setRadioIcon] = useState(null);
-
+  const [playBtn, setPlayBtn] = useState(null);
+  const [pauseBtn, setPauseBtn] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
-
-  const server = 'http://localhost:1337/api';
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -21,7 +23,6 @@ function MusicPlayer() {
     }
     setIsPlaying(!isPlaying);
   };
-
   const findPopRadios = async () => {
     try {
       // For now, just use one station for foundational testing
@@ -38,6 +39,27 @@ function MusicPlayer() {
         console.error(e)
     }
   }
+  const getImages = async() => {
+    await fetchData();
+    setImages(getData());
+   };  
+
+  const setImages = (images) => {
+    const imgServer = 'http://localhost:1337';
+  
+    let playBtn = images.find(obj => obj.name == 'bb-play.png');
+    let pauseBtn = images.find(obj => obj.name == 'bb-pause.png');
+
+    let playBtnUrl = imgServer + playBtn.url;
+    let pauseBtnUrl = imgServer + pauseBtn.url;
+
+    setPlayBtn(playBtnUrl);
+    setPauseBtn(pauseBtnUrl);
+  };
+
+  useEffect(() => {
+    getImages()
+  }, [])
 
   useEffect(() => {
     findPopRadios();
@@ -46,15 +68,16 @@ function MusicPlayer() {
   return (
     <>
       <div className='radio-player'>
-          <audio ref={audioRef} src={radioData} type='audio/mpeg'></audio>
-           <div className='radio-info'>
-            
-            <img id='radio-ico' src={radioIcon} alt=""/>
-            <p id='radio-name'>{radioName}</p>
-            <button id='music-btn' onClick={togglePlayPause}>
-             {isPlaying ? <img id='boomboxIcon' src={`${server}/images/bb-play.png`}/> : <img id='boomboxIcon' src={`${server}/images/bb-pause.png`}/>}
-            </button>
-           </div>
+       <audio ref={audioRef} src={radioData} type='audio/mpeg'></audio>
+        <div className='radio-info'>
+          <img id='radio-ico' src={radioIcon} alt=""/>
+          <p id='radio-name'>{radioName}</p>    
+        </div> 
+        <div className='radio-btns'>
+          <button id='music-btn' onClick={togglePlayPause}>
+            {isPlaying ? <img id='playBtn' src={playBtn} alt="Play button"/> : <img id='pauseBtn' src={pauseBtn} alt="Pause button"/>}
+          </button>        
+        </div> 
       </div>
     </>
     
