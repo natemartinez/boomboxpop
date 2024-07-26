@@ -3,8 +3,29 @@ import '../styles/style.css';
 import { Link } from 'react-router-dom';
 import MusicPlayer from './MusicPlayer';
 
-function Menu() {
-  const [isShowing, setIsShowing] = useState(true);
+function Menu({songData}) {
+  const [isShowing, setIsShowing] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [curSong, setcurSong] = useState(null);
+
+  const updateCurSong = (song) => {
+   setcurSong(song);
+   setIsLoaded(true);
+  }
+
+  const loadMenu =() => {
+    setTimeout(() => {
+      setIsShowing(true);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    loadMenu();
+  }, []);
+
+  useEffect(() => {
+    updateCurSong(songData);
+  }, [songData])
 
   const menuToggle = () => {
     if (isShowing) {
@@ -21,9 +42,9 @@ function Menu() {
        <button id='menu-toggle' type="button">
        </button>
        
+       {isLoaded ? <MusicPlayer curSong={curSong}/>:''} 
        {isShowing ?
          <>
-           <MusicPlayer/>
            <nav className='menu-section'>
             <div className='menu'>
              <div><Link to='/music'>Soundtracks</Link></div>

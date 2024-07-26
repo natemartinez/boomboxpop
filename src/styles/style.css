@@ -564,18 +564,24 @@ footer{
 .game-wrapper{
     margin-bottom: 5em;
 }
-.music-wrapper{
-    margin-top:3em ;
+.retro-wrapper{
+    margin-top:3em;
 }
+.retro-bkgrd{
+    aspect-ratio: 4/3;
+}
+
 @media screen and (min-width:767px) {
    .topic-bkgrd{
-     width: 55%;
+     width: 70%;
      height: 55%;
    }
    
     .topic-menu-content{
       font-size:2vw
    }
+
+   
 }
 
 

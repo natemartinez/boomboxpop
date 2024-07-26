@@ -12,13 +12,15 @@ import { config, server } from '../config';
 import { fetchData, getData } from '../library';
 import axios from 'axios';
 
-function Soundtrack() {
+function Soundtrack({songData, updateSongData}) {
   const [soundtracks, setSoundtracks] = useState(null);
   const [mainTitle, setMainTitle] = useState(null);
   const [mainDesc, setMainDesc] = useState(null);
   const [mainImg, setMainImg] = useState(null);
   const [sotdList, setSOTDList] = useState([]);
   const [playBtn, setPlayBtn] = useState(null);
+
+  // need to ensure that a song isnt automatically playing when the page loads
 
   const getInfo = async() => {
     axios.get(`${server}/soundtracks`, config)
@@ -30,12 +32,10 @@ function Soundtrack() {
         console.error('There was an error fetching the soundtrack!', error);
       });
   };
-
   const getImages = async() => {
    await fetchData();
    setImages(getData());
   };
-
   const setImages = (images) => {
     const imgServer = 'http://localhost:1337';
     console.log('Img Data: ', images);
@@ -45,9 +45,6 @@ function Soundtrack() {
 
     setPlayBtn(playBtnUrl)
   };
- 
-  // this function will change the index when the page refreshes
-  // SOTD = Soundtrack of the day
   const setSOTD = () => {
     if (soundtracks && soundtracks.length > 0) {
       // let newIndex = Math.floor(Math.random() * 10);
@@ -60,7 +57,6 @@ function Soundtrack() {
       // setMainTrack(soundtracks[0]) // will eventually be newIndex when soundtracks are filled
     }
   };
-
   const setSOTDSongs = (songList) => {
     let songArr = [];
     Object.entries(songList).forEach(([key, value]) => {
@@ -68,7 +64,11 @@ function Soundtrack() {
     }); 
     setSOTDList(songArr);
   };
-
+  const playSong = (song) => {
+    // this function will pass the song to the music player
+    console.log(song)
+    //setcurSong(song);
+  };
   // Function to process and sanitize HTML content
   const processContent = (content) => {
     return DOMPurify.sanitize(content);
@@ -78,7 +78,6 @@ function Soundtrack() {
     getInfo();
     getImages();
   }, []);
-
   useEffect(() => {
     setSOTD(soundtracks);
   }, [soundtracks]);
@@ -106,7 +105,7 @@ function Soundtrack() {
               {sotdList ? sotdList.map((song, index) => (
                 <div key={index} className='d-flex justify-center'>
                   <li className='my-3 sotd-tracks' key={index} dangerouslySetInnerHTML={{ __html: processContent(song.title) }}></li>
-                  <button id='play-btn'><img id='play-btn-img' src={playBtn}/></button>
+                  <button id='play-btn' onClick={() => updateSongData(song)}><img id='play-btn-img' src={playBtn}/></button>
                 </div>
                )) : ''
               }

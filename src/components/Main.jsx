@@ -25,10 +25,15 @@ function Main() {
   const [trends, setTrends] = useState([]);
   const [path, setPath] = useState('/articles/');
   const [remoteIcon, setremoteIcon] = useState(null);
-  const [vinylIcon, setvinylIcon] = useState(null);
+  const [retroIcon, setretroIcon] = useState(null);
   const [gamesBkgrd, setgamesBkgrd] = useState(null);
-  const [musicBkgrd, setmusicBkgrd] = useState(null);
+  const [retroBkgrd, setretroBkgrd] = useState(null);
   const location = useLocation();
+  const [songData, setSongData] = useState(null);
+
+  const updateSongData = (newData) => {
+    setSongData(newData);
+  };
 
   const getCategories = () => {
     axios.get(`${server}/categories`, config)
@@ -39,7 +44,6 @@ function Main() {
        console.error('There was an error fetching the images!', error);
      });
   };
-  
   const getTrends = () => {
      axios.get(`${server}/trendings`, config)
       .then(response => {
@@ -49,7 +53,6 @@ function Main() {
         console.error('There was an error fetching the images!', error);
       });
   };
-
   const getFeatures = () => {
     axios.get(`${server}/features`, config)
      .then(response => {
@@ -60,7 +63,6 @@ function Main() {
        console.error('There was an error fetching the images!', error);
      });
   };
-
   const getImages = async() => {
     await fetchData();
     setImages(getData());
@@ -77,16 +79,16 @@ function Main() {
     let gamesBkgrd = images.find(obj => obj.name == 'controllers.jpg');
     let gamesBkgrdUrl = imgServer + gamesBkgrd.url;
 
-    let vinylIcon = images.find(obj => obj.name == 'vinyl.png');
-    let vinylIconUrl = imgServer + vinylIcon.url;
+    let retroIcon = images.find(obj => obj.name == 'retro-icon.png');
+    let retroIconUrl = imgServer + retroIcon.url;
 
-    let musicBkgrd = images.find(obj => obj.name == 'cassettes.jpg');
-    let musicBkgrdUrl = imgServer + musicBkgrd.url;
+    let retroBkgrd = images.find(obj => obj.name == 'retro-joystick.jpg');
+    let retroBkgrdUrl = imgServer + retroBkgrd.url;
 
     setremoteIcon(remoteIconUrl);
-    setvinylIcon(vinylIconUrl);
+    setretroIcon(retroIconUrl);
     setgamesBkgrd(gamesBkgrdUrl);
-    setmusicBkgrd(musicBkgrdUrl);
+    setretroBkgrd(retroBkgrdUrl);
 
   };
 
@@ -441,19 +443,19 @@ function Main() {
         </Container>
       </section>
       <section className='st-section p-5'>
-        <Soundtrack/>
+        <Soundtrack songData={songData} updateSongData={updateSongData}/>
       </section>
       <section className='all-topic-section my-5'>
         <div className='topic-wrapper container'>
+          <h1 className='text-center my-5'>All Topics</h1>
           <Col>
            <div className='game-wrapper'>
-           <h1 className='text-center my-5'>All Topics</h1>
             <div className='bkgrd-wrapper'>
               <img className='topic-bkgrd img-fluid' src={gamesBkgrd} alt="remotes"/>
               <div className='topic-menu'>
                <div className='topic-menu-content d-flex flex-column align-items-center'>
                 <img src={remoteIcon} className='game-ico img-fluid' alt="controller"/>
-                <h2 className='all-topic-header'>Games</h2>
+                <h2 className='all-topic-header'>Modern</h2>
                 <Button className="p-3 ">Example Text</Button>              
                </div>
              </div>
@@ -461,13 +463,13 @@ function Main() {
            </div>
           </Col>
           <Col>
-           <div className='music-wrapper'>
+           <div className='retro-wrapper'>
            <div className='bkgrd-wrapper'>
-              <img className='topic-bkgrd img-fluid' src={musicBkgrd} alt="cassettes"/>
+              <img className='topic-bkgrd retro-bkgrd img-fluid' src={retroBkgrd} alt="joysticks"/>
               <div className='topic-menu'>
                 <div className='topic-menu-content d-flex flex-column align-items-center'>
-                 <img src={vinylIcon} className='game-ico img-fluid'  alt="vinyl"/>
-                 <h2 className='all-topic-header'>Music</h2>
+                 <img src={retroIcon} className='game-ico img-fluid'  alt="joysticks"/>
+                 <h2 className='all-topic-header'>Retro</h2>
                  <Button className="p-3 ">Example Text</Button>              
                 </div>
              </div>
@@ -487,7 +489,7 @@ function Main() {
          <p>Continue the conversation at one of our links!</p>
       </footer>      
      </div>
-     <Menu/>
+     <Menu songData={songData}/>
     </div>
   );
 }
